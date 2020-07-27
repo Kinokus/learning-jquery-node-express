@@ -1,0 +1,48 @@
+body {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  //background: beige;
+  border: 1px solid greenyellow;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+
+  #structure {
+    flex: 0 1 80%;
+  }
+
+  .input-form {
+    flex: 0 1 80%;
+    display: block;
+    margin-block-end: auto;
+    margin-block-start: 32px;
+    padding: 32px;
+    border: 1px solid gray;
+
+    .input-field {
+      background: transparent;
+      margin-block-end: 16px;
+      button{
+        width: 120px;
+      }
+      label{
+        width: 240px;
+        input{
+          width: 240px;
+        }
+      }
+      &.emp{
+        label{
+          width: 120px;
+          input{
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+}
