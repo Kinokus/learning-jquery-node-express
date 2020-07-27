@@ -1,0 +1,44 @@
+body {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 1px solid greenyellow;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+body #structure {
+  flex: 0 1 80%;
+}
+body .input-form {
+  flex: 0 1 80%;
+  display: block;
+  margin-block-end: auto;
+  margin-block-start: 32px;
+  padding: 32px;
+  border: 1px solid gray;
+}
+body .input-form .input-field {
+  background: transparent;
+  margin-block-end: 16px;
+}
+body .input-form .input-field button {
+  width: 120px;
+}
+body .input-form .input-field label {
+  width: 240px;
+}
+body .input-form .input-field label input {
+  width: 240px;
+}
+body .input-form .input-field.emp label {
+  width: 120px;
+}
+body .input-form .input-field.emp label input {
+  width: 120px;
+}
+
+/*# sourceMappingURL=index.css.map */

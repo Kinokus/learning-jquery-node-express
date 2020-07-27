@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="input-form">
+    <div class="input-field">
+        <button id="bNameSubmit">Add Building</button>
+        <button id="bNameRemove">Del Building</button>
+        <label for="bName"> <input type="text" id="bName"></label>
+    </div>
+
+    <div class="input-field">
+
+        <button id="fNameSubmit">Add Floor</button>
+        <button id="fNameRemove">Del Floor</button>
+        <label for="fName"> <input type="text" id="fName"></label>
+    </div>
+
+    <div class="input-field">
+        <button id="rNameSubmit">Add Room</button>
+        <button id="rNameRemove">Del Room</button>
+        <label for="rName"> <input type="text" id="rName"></label>
+    </div>
+
+    <div class="input-field emp">
+        <button id="eNameSubmit">Add Employee</button>
+        <button id="eNameRemove">Del Employee</button>
+        <label for="efName">First name <input type="text" id="efName"></label>
+        <label for="esName">Last name <input type="text" id="esName"></label>
+        <label for="eId">ID <input type="text" id="eId"></label>
+    </div>
+
+</div>
+
+
+<pre id="structure">
+
+</pre>
+
+<script>
+    let buildingName, floorName, roomName, employeeFirstName, employeeLastName, employeeId, saveFlag
+
+    const setValues = () => {
+        buildingName = $('#bName').val();
+        floorName = $('#fName').val();
+        roomName = $('#rName').val();
+        employeeFirstName = $('#efName').val();
+        employeeLastName = $('#esName').val();
+        employeeId = $('#eId').val();
+        saveFlag = true;
+
+    }
+
+
+    $('#structure').innerText = ''
+    $.get('/landscape', {}, (data) => {
+        $('#structure').text(data);
+    });
+
+    $('#bNameSubmit').click(function () {
+        setValues()
+        $.post('/addBuilding', {buildingName}, (data) => {
+            $('#structure').text(data);
+        });
+    })
+
+    $('#bNameRemove').click(function () {
+        setValues()
+        $.ajax({
+            url: '/removeBuilding',
+            type: 'DELETE',
+            data: {buildingName},
+            success: (data) => {
+                $('#structure').text(data);
+            }
+        });
+    })
+
+    $('#rNameRemove').click(function () {
+        setValues()
+        $.ajax({
+            url: '/removeRoom',
+            type: 'DELETE',
+            data: {buildingName, floorName, roomName},
+            success: (data) => {
+                $('#structure').text(data);
+            }
+        });
+    })
+    $('#eNameRemove').click(function () {
+        setValues()
+        $.ajax({
+            url: '/removeEmployee',
+            type: 'DELETE',
+            data: {buildingName, floorName, roomName, employeeId},
+            success: (data) => {
+                $('#structure').text(data);
+            }
+        });
+    })
+
+    $('#fNameSubmit').click(function () {
+        setValues()
+        $.post('/addFloor', {buildingName, floorName}, (data) => {
+            $('#structure').text(data);
+        });
+    })
+
+
+    $('#fNameRemove').click(function () {
+        setValues()
+        $.ajax({
+            url: '/removeFloor',
+            type: 'DELETE',
+            data: {buildingName, floorName},
+            success: (data) => {
+                $('#structure').text(data);
+            }
+        });
+    })
+
+
+    $('#rNameSubmit').click(function () {
+        setValues()
+        $.post('/addRoom', {buildingName, floorName, roomName}, (data) => {
+            $('#structure').text(data);
+        });
+    })
+
+    $('#eNameSubmit').click(function () {
+        setValues()
+        $.post('/addEmployee', {
+            buildingName,
+            floorName,
+            roomName,
+            employeeFirstName,
+            employeeLastName,
+            employeeId
+        }, (data) => {
+            $('#structure').text(data);
+        });
+    })
+
+</script>
+
+</body>
+</html>
